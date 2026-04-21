@@ -15,7 +15,7 @@ import SongDetail from "./pages/SongDetail";
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/Wavy-Music/">
       <FavoritesProvider>
         <PlayerProvider>
           <Routes>
