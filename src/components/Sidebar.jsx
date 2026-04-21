@@ -23,7 +23,7 @@ export default function Sidebar({ open, onClose }) {
       >
         <div className="flex items-center justify-between p-5">
           <NavLink to="/" className="flex items-center gap-2" onClick={onClose}>
-            <img src="/headphone-favicon-logo.png" alt="Wavy logo" className="w-8 h-8 rounded-lg object-contain" />
+            <img src={`${import.meta.env.BASE_URL}/headphone-favicon-logo.png`} alt="Wavy logo" className="w-8 h-8 rounded-lg object-contain" />
             <span className="text-lg font-bold text-white">Wavy</span>
           </NavLink>
           <button className="lg:hidden text-text-secondary hover:text-white" onClick={onClose} aria-label="Close sidebar">

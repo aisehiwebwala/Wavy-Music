@@ -31,7 +31,7 @@ export default function Layout() {
               <Menu size={22} />
             </button>
             <Link to="/" className="lg:hidden shrink-0">
-              <img src="/headphone-favicon-logo.png" alt="Wavy" className="w-7 h-7 rounded object-contain" />
+              <img src={`${import.meta.env.BASE_URL}/headphone-favicon-logo.png`} alt="Wavy" className="w-7 h-7 rounded object-contain" />
             </Link>
             <form onSubmit={handleSearch} className="flex-1 max-w-md">
               <div className="relative">
