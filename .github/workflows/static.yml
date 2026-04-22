@@ -38,7 +38,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Build project
-        run: npm run build
+        run: |
+          npm run build
+          cp dist/index.html dist/404.html
         env:
           # Pass a secret stored securely in your GitHub repository settings
           VITE_API_KEY: ${{ secrets.VITE_API_KEY }}
