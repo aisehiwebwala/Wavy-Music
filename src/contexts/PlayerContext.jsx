@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useRef, useCallback, useEffect } from "react";
-import { getDownloadUrl, getAvailableQualities } from "../api/helpers";
+import { getDownloadUrl, getAvailableQualities, getImageUrl, getArtistNames } from "../api/helpers";
 import { getSongSuggestions } from "../api/client";
 
 const PlayerContext = createContext(null);
@@ -174,6 +174,35 @@ export function PlayerProvider({ children }) {
   const toggleRepeat = useCallback(() => {
     setRepeat((r) => (r === "off" ? "all" : r === "all" ? "one" : "off"));
   }, []);
+
+  useEffect(() => {
+    if ("mediaSession" in navigator) {
+      navigator.mediaSession.setActionHandler("play", () => {
+        audioRef.current.play().catch(() => {});
+      });
+      navigator.mediaSession.setActionHandler("pause", () => {
+        audioRef.current.pause();
+      });
+      navigator.mediaSession.setActionHandler("previoustrack", skipPrev);
+      navigator.mediaSession.setActionHandler("nexttrack", skipNext);
+    }
+  }, [skipPrev, skipNext]);
+
+  useEffect(() => {
+    if ("mediaSession" in navigator && currentSong) {
+      navigator.mediaSession.metadata = new window.MediaMetadata({
+        title: currentSong.name || currentSong.title || "Unknown Track",
+        artist: getArtistNames(currentSong.artists) || "Unknown Artist",
+        artwork: [
+          {
+            src: getImageUrl(currentSong.image, "500x500") || "",
+            sizes: "500x500",
+            type: "image/jpeg",
+          },
+        ],
+      });
+    }
+  }, [currentSong]);
 
   return (
     <PlayerContext.Provider
