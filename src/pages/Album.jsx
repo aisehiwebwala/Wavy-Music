@@ -21,7 +21,7 @@ export default function Album() {
           <div className="w-48 h-48 md:w-56 md:h-56 bg-surface-lighter rounded-xl shrink-0" />
           <div className="flex-1">
             <div className="h-4 bg-surface-lighter rounded w-16 mb-2" />
-            <div className="h-8 bg-surface-lighter rounded w-64 mb-3" />
+            <div className="h-8 bg-surface-lighter rounded w-3/4 max-w-64 mb-3" />
             <div className="h-4 bg-surface-lighter rounded w-48 mb-6" />
             <div className="h-10 bg-surface-lighter rounded-full w-32" />
           </div>
@@ -61,7 +61,7 @@ export default function Album() {
         </div>
         <div className="flex flex-col justify-end">
           <span className="text-xs font-semibold uppercase tracking-wider text-text-secondary">Album</span>
-          <h1 className="text-3xl md:text-5xl font-extrabold text-white mt-1 mb-2">{album.name}</h1>
+          <h1 className="text-2xl md:text-5xl font-extrabold text-white mt-1 mb-2 break-words">{album.name}</h1>
           <div className="flex flex-wrap items-center gap-1 text-sm text-text-secondary">
             {album.artists?.primary?.[0] && (
               <Link to={`/artist/${album.artists.primary[0].id}`} className="font-semibold text-white hover:underline">

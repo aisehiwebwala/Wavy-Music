@@ -27,7 +27,7 @@ export default function MediaCard({ item, type, subtitle }) {
         {type === "song" && (
           <button
             onClick={handlePlay}
-            className="absolute bottom-2 right-2 w-10 h-10 rounded-full bg-brand flex items-center justify-center opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200 shadow-xl hover:scale-105"
+            className="absolute bottom-2 right-2 w-10 h-10 rounded-full bg-brand flex items-center justify-center opacity-100 translate-y-0 sm:opacity-0 sm:translate-y-2 sm:group-hover:opacity-100 sm:group-hover:translate-y-0 transition-all duration-200 shadow-xl hover:scale-105"
             aria-label={`Play ${name}`}
           >
             <Play size={18} className="text-white ml-0.5" fill="currentColor" />

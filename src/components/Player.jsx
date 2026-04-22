@@ -113,7 +113,7 @@ export default function Player() {
 
   if (!currentSong) {
     return (
-      <div className="h-16 sm:h-20 bg-surface border-t border-white/5 flex items-center justify-center">
+      <div className="h-16 sm:h-20 bg-surface border-t border-white/5 flex items-center justify-center shrink-0 pb-[env(safe-area-inset-bottom)]">
         <p className="text-text-muted text-sm">Select a song to start playing</p>
       </div>
     );
@@ -145,7 +145,7 @@ export default function Player() {
   // --- Mobile expanded fullscreen player ---
   if (expanded) {
     return (
-      <div className="fixed inset-0 z-[60] bg-surface flex flex-col">
+      <div className="fixed inset-0 z-[60] bg-surface flex flex-col overflow-hidden">
         <div className="flex items-center justify-between px-4 py-3">
           <button onClick={() => setExpanded(false)} className="text-text-secondary p-1" aria-label="Minimize player">
             <ChevronDown size={24} />
@@ -223,7 +223,7 @@ export default function Player() {
           </button>
         </div>
 
-        <div className="flex items-center justify-center gap-8 pb-8 pt-2">
+        <div className="flex items-center justify-center gap-8 pb-[max(2rem,env(safe-area-inset-bottom))] pt-2">
           <button onClick={() => setShowQueue(true)} className="flex flex-col items-center gap-1 text-text-muted" aria-label="View queue">
             <ListMusic size={20} />
             <span className="text-[10px]">Queue</span>
@@ -242,12 +242,12 @@ export default function Player() {
 
   // --- Compact player bar ---
   return (
-    <>
+    <div className="shrink-0">
       {showQueue && <QueueModal queue={queue} onClose={() => setShowQueue(false)} />}
       {showQuality && <QualityModal audioQuality={audioQuality} setAudioQuality={setAudioQuality} availableQualities={availableQualities} onClose={() => setShowQuality(false)} />}
 
       {/* MOBILE: compact bar with full-width progress on top */}
-      <div className="sm:hidden bg-surface-light border-t border-white/5 z-30 relative">
+      <div className="sm:hidden bg-surface-light border-t border-white/5 z-30 relative pb-[env(safe-area-inset-bottom)]">
         <div className="relative h-1 w-full bg-surface-lighter">
           <div className="h-full bg-brand transition-[width] duration-100" style={{ width: `${progress}%` }} />
           <input
@@ -353,6 +353,6 @@ export default function Player() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

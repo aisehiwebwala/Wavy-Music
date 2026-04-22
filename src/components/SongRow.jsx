@@ -25,13 +25,17 @@ export default function SongRow({ song, index, songs }) {
 
   return (
     <div
-      className={`group flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-surface-lighter/60 transition-colors ${
+      onClick={handlePlay}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => e.key === "Enter" && handlePlay()}
+      className={`group flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-surface-lighter/60 transition-colors cursor-pointer active:bg-surface-lighter/80 ${
         isActive ? "bg-surface-lighter/40" : ""
       }`}
     >
       {/* Track number / play button */}
       <div className="w-6 text-center shrink-0">
-        <span className={`text-sm group-hover:hidden ${isActive ? "text-brand" : "text-text-muted"}`}>
+        <span className={`text-sm hidden sm:inline sm:group-hover:hidden ${isActive ? "text-brand" : "text-text-muted"}`}>
           {isActive && isPlaying ? (
             <span className="flex items-center justify-center gap-px">
               <span className="w-0.5 h-3 bg-brand animate-pulse rounded-full" />
@@ -42,7 +46,7 @@ export default function SongRow({ song, index, songs }) {
             index + 1
           )}
         </span>
-        <button onClick={handlePlay} className="hidden group-hover:block text-white" aria-label={isActive && isPlaying ? "Pause" : "Play"}>
+        <button onClick={handlePlay} className="block sm:hidden sm:group-hover:block text-white" aria-label={isActive && isPlaying ? "Pause" : "Play"}>
           {isActive && isPlaying ? <Pause size={14} fill="currentColor" /> : <Play size={14} fill="currentColor" className="ml-0.5" />}
         </button>
       </div>
@@ -88,7 +92,7 @@ export default function SongRow({ song, index, songs }) {
       <div className="flex items-center gap-2">
         <button
           onClick={(e) => { e.stopPropagation(); toggleFavorite(song); }}
-          className={`opacity-0 group-hover:opacity-100 transition-opacity ${liked ? "opacity-100" : ""}`}
+          className={`opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity ${liked ? "!opacity-100" : ""}`}
           aria-label={liked ? "Remove from favorites" : "Add to favorites"}
         >
           <Heart size={14} className={liked ? "fill-brand text-brand" : "text-text-muted hover:text-white"} />
@@ -97,7 +101,7 @@ export default function SongRow({ song, index, songs }) {
         <div className="relative">
           <button
             onClick={(e) => { e.stopPropagation(); setShowMenu(!showMenu); }}
-            className="opacity-0 group-hover:opacity-100 text-text-muted hover:text-white transition-opacity"
+            className="opacity-100 sm:opacity-0 sm:group-hover:opacity-100 text-text-muted hover:text-white transition-opacity"
             aria-label="More options"
           >
             <MoreHorizontal size={16} />

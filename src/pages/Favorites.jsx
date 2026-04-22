@@ -28,7 +28,7 @@ export default function Favorites() {
         </div>
         <div>
           <span className="text-xs font-semibold uppercase tracking-wider text-text-secondary">Playlist</span>
-          <h1 className="text-3xl md:text-5xl font-extrabold text-white mt-1 mb-2">Liked Songs</h1>
+          <h1 className="text-2xl md:text-5xl font-extrabold text-white mt-1 mb-2">Liked Songs</h1>
           <p className="text-sm text-text-secondary">{favoritesList.length} songs</p>
 
           {favoritesList.length > 0 && (

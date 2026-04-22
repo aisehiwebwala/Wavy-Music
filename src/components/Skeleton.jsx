@@ -11,13 +11,13 @@ export function SkeletonCard() {
 export function SkeletonRow() {
   return (
     <div className="flex items-center gap-3 px-4 py-2.5 animate-pulse">
-      <div className="w-5 h-4 bg-surface-lighter rounded" />
-      <div className="w-10 h-10 bg-surface-lighter rounded" />
-      <div className="flex-1">
-        <div className="h-3.5 bg-surface-lighter rounded w-48 mb-1.5" />
-        <div className="h-3 bg-surface-lighter rounded w-32" />
+      <div className="w-5 h-4 bg-surface-lighter rounded shrink-0" />
+      <div className="w-10 h-10 bg-surface-lighter rounded shrink-0" />
+      <div className="flex-1 min-w-0">
+        <div className="h-3.5 bg-surface-lighter rounded w-3/4 max-w-48 mb-1.5" />
+        <div className="h-3 bg-surface-lighter rounded w-1/2 max-w-32" />
       </div>
-      <div className="h-3 bg-surface-lighter rounded w-12" />
+      <div className="h-3 bg-surface-lighter rounded w-12 shrink-0" />
     </div>
   );
 }

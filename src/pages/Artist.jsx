@@ -22,7 +22,7 @@ export default function Artist() {
           <div className="w-40 h-40 md:w-52 md:h-52 bg-surface-lighter rounded-full shrink-0" />
           <div>
             <div className="h-4 bg-surface-lighter rounded w-16 mb-2" />
-            <div className="h-10 bg-surface-lighter rounded w-64 mb-3" />
+            <div className="h-10 bg-surface-lighter rounded w-3/4 max-w-64 mb-3" />
             <div className="h-4 bg-surface-lighter rounded w-32" />
           </div>
         </div>
@@ -75,7 +75,7 @@ export default function Artist() {
               {artist.isVerified && <CheckCircle size={16} className="text-brand" />}
               <span className="text-xs font-semibold uppercase tracking-wider text-text-secondary">Artist</span>
             </div>
-            <h1 className="text-3xl md:text-5xl font-extrabold text-white mt-1">{artist.name}</h1>
+            <h1 className="text-2xl md:text-5xl font-extrabold text-white mt-1 break-words">{artist.name}</h1>
             <div className="flex flex-wrap items-center gap-2 mt-2 text-sm text-text-secondary justify-center md:justify-start">
               {artist.fanCount && <span>{formatCount(artist.fanCount)} fans</span>}
               {artist.followerCount && <span>&middot; {formatCount(artist.followerCount)} followers</span>}
