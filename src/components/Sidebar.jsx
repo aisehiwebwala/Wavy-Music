@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import { Home, Search, Heart, Library, X, Music, Disc3, Mic2 } from "lucide-react";
 import { useFavorites } from "../contexts/FavoritesContext";
 import { getImageUrl, getArtistNames } from "../api/helpers";
+import ProxyToggle from "./ProxyToggle";
 
 export default function Sidebar({ open, onClose }) {
   const { favoritesList } = useFavorites();
@@ -98,6 +99,10 @@ export default function Sidebar({ open, onClose }) {
               </div>
             </NavLink>
           ))}
+        </div>
+
+        <div className="border-t border-white/5 text-text-secondary hover:text-white transition-colors">
+          <ProxyToggle />
         </div>
       </aside>
     </>

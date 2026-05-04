@@ -1,11 +1,39 @@
 const BASE = "https://saavn.sumit.co/api";
 
+// Check local storage to persist the user's selection (defaults to true)
+let useProxy = typeof window !== "undefined" 
+  ? localStorage.getItem("use_proxy") !== "false" 
+  : true;
+
+export function toggleProxy(enable) {
+  useProxy = enable;
+  if (typeof window !== "undefined") {
+    localStorage.setItem("use_proxy", enable);
+  }
+}
+
+export function isProxyEnabled() {
+  return useProxy;
+}
+
 async function request(path, params = {}) {
   const url = new URL(`${BASE}${path}`);
   for (const [k, v] of Object.entries(params)) {
     if (v != null) url.searchParams.set(k, v);
   }
-  const res = await fetch(url);
+  
+  let res;
+  if (useProxy) {
+    res = await fetch("https://middle-request-handler.vercel.app/api", {
+      method: "GET",
+      headers: {
+        "req_url": url.href
+      }
+    });
+  } else {
+    res = await fetch(url);
+  }
+
   if (!res.ok) throw new Error(`API error: ${res.status}`);
   const json = await res.json();
   if (!json.success) throw new Error("API returned unsuccessful response");
