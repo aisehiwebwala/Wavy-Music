@@ -1,28 +1,38 @@
 import React, { useState } from "react";
 import { toggleProxy, isProxyEnabled } from "../api/client";
+import { Shield } from "lucide-react";
 
 export default function ProxyToggle() {
-  // Initialize the state with the current value from local storage / client.js
   const [proxyActive, setProxyActive] = useState(isProxyEnabled());
 
-  const handleToggle = (e) => {
-    const isChecked = e.target.checked;
-    setProxyActive(isChecked); // Update the React UI state
-    toggleProxy(isChecked);    // Update the API client & LocalStorage
+  const handleToggle = () => {
+    const newState = !proxyActive;
+    setProxyActive(newState);
+    toggleProxy(newState);
   };
 
   return (
-    <div style={{ display: "flex", alignItems: "center", gap: "8px", padding: "8px" }}>
-      <input
-        id="proxy-toggle"
-        type="checkbox"
-        checked={proxyActive}
-        onChange={handleToggle}
-        style={{ cursor: "pointer", width: "16px", height: "16px" }}
-      />
-      <label htmlFor="proxy-toggle" style={{ cursor: "pointer", fontSize: "14px" }}>
-        Enable Proxy
-      </label>
+    <div 
+      className="flex items-center justify-between px-3 py-4 cursor-pointer"
+      onClick={handleToggle}
+      role="switch"
+      aria-checked={proxyActive}
+    >
+      <div className="flex items-center gap-3 text-sm font-medium">
+        <Shield size={20} />
+        <span>API Proxy</span>
+      </div>
+      <div 
+        className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors duration-300 ${
+          proxyActive ? "bg-white" : "bg-white/20"
+        }`}
+      >
+        <span 
+          className={`inline-block h-3 w-3 transform rounded-full transition-transform duration-300 ${
+            proxyActive ? "translate-x-5 bg-black" : "translate-x-1 bg-white"
+          }`} 
+        />
+      </div>
     </div>
   );
 }
