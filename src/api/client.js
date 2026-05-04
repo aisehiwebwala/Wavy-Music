@@ -1,9 +1,10 @@
 const BASE = "https://saavn.sumit.co/api";
+const PROXY = "https://middle-request-handler.vercel.app/api"
 
 // Check local storage to persist the user's selection (defaults to true)
-let useProxy = typeof window !== "undefined" 
-  ? localStorage.getItem("use_proxy") !== "false" 
-  : true;
+let useProxy = typeof window !== "undefined"
+  ? localStorage.getItem("use_proxy") == "true"
+  : false;
 
 export function toggleProxy(enable) {
   useProxy = enable;
@@ -21,10 +22,10 @@ async function request(path, params = {}) {
   for (const [k, v] of Object.entries(params)) {
     if (v != null) url.searchParams.set(k, v);
   }
-  
+
   let res;
   if (useProxy) {
-    res = await fetch("https://middle-request-handler.vercel.app/api", {
+    res = await fetch(PROXY, {
       method: "GET",
       headers: {
         "req_url": url.href
